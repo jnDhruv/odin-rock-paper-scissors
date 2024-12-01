@@ -11,6 +11,10 @@ function getHumanChoice(event) {
     return event.id;
 }
 
+function titleize(string) {
+    return string[0].toUpperCase() + string.substr(1);
+}
+
 function playRound(humanChoice, computerChoice) {
 
     if (humanChoice == computerChoice) {
@@ -22,13 +26,13 @@ function playRound(humanChoice, computerChoice) {
         || (humanChoice == "paper" && computerChoice == "scissors")
         || (humanChoice == "scissors" && computerChoice == "rock")
     ) {
-        result.textContent = `Computer won! ${computerChoice} beats ${humanChoice}.`;
+        result.textContent = `Computer won! ${titleize(computerChoice)} beats ${humanChoice}.`;
         result.style.color = 'var(--lose-red-color)';
         computerScore++;
     } 
     
     else {
-        result.textContent = `You won! ${humanChoice} beats ${computerChoice}.`;
+        result.textContent = `You won! ${titleize(humanChoice)} beats ${computerChoice}.`;
         result.style.color = 'var(--win-green-color)';
         humanScore++;
     }
@@ -60,9 +64,32 @@ function driver(choice) {
             finalResult.textContent = `Oh no! You lost!`;
             finalResult.style.color = 'var(--lose-red-color)';
         }
-        document.querySelector(".scoreboard").appendChild(finalResult);
+
+        let containerDiv = document.querySelector(".scoreboard");
+        containerDiv.appendChild(finalResult);
+        
+        let playAgainBtn = document.createElement("button");
+        playAgainBtn.classList.add("playAgainBtn");
+        playAgainBtn.textContent = "Play Again?";
+
+        playAgainBtn.addEventListener("click", (e) => {
+
+            containerDiv.removeChild(finalResult);
+            containerDiv.removeChild(playAgainBtn);
+
+            humanScore = 0;
+            computerScore = 0;
+
+            result.textContent = "Select your choice to start playing:";
+            result.style.color = "white";
+            updateScores();
+        });
+        containerDiv.appendChild(playAgainBtn);
     }
 }
+
+// On play again:
+// - Reset the scores
 
 let humanScore = 0;
 let computerScore = 0;
@@ -73,9 +100,6 @@ let computerScoreRef = document.querySelector(".computer-score h1");
 let result = document.querySelector(".result");
 
 let btnContainer = document.querySelector(".choices");
-let rockBtn = document.querySelector("#rock");
-let paperBtn = document.querySelector("#paper");
-let scissorsBtn = document.querySelector("#scissors");
 
 btnContainer.addEventListener("click", (e) => {
     let btnClicked = e.target;

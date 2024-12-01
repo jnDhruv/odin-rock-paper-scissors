@@ -52,7 +52,13 @@ body {
 }
 
 .choice-button {
+    cursor: pointer;
     height: 50px;
+}
+
+.playAgainBtn {
+    cursor: pointer;
+    padding: 10px 15px;
 }
 
 .hidden {
