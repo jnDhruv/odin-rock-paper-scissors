@@ -1,0 +1,55 @@
+:root {
+    --win-green-color : ;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial;
+    background-color: #111827;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.scoreboard {
+    text-align: center;
+}
+
+.scoreboard h1 {
+    color:bisque;
+}
+
+.score-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.human-score, .computer-score {
+    padding: 20px 30px;
+}
+
+.score-box p {
+    color: white;
+}
+
+.human-score {
+    border-right: 1px solid white;
+}
+
+.result {
+    color: white;
+}
+
+.choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.choice-button {
+    height: 50px;
+}
