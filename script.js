@@ -7,50 +7,44 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    let ch = prompt("Rock, paper or scissors?");
-    if (ch.toLowerCase() == 'rock' || ch.toLowerCase() == 'paper' || ch.toLowerCase() == 'scissors') {
-        return ch.toLowerCase();
-    }
-    else {
-        alert("Wrong Choice!");
-        return getHumanChoice();
-    }
+function getHumanChoice(event) {
+    return event.id;
 }
 
 function playRound(humanChoice, computerChoice) {
     if (humanChoice == computerChoice) {
-        console.log(`No one wins! Both chose ${humanChoice}.`);
+        result.textContent = `No one wins! Both chose ${humanChoice}.`;
+        result.style.color = 'white';
     }
     else if ((humanChoice == "rock" && computerChoice == "paper")
         || (humanChoice == "paper" && computerChoice == "scissors")
         || (humanChoice == "scissors" && computerChoice == "rock")
     ) {
-        console.log(`Computer won! ${computerChoice} beats ${humanChoice}.`);
+        result.textContent = `Computer won! ${computerChoice} beats ${humanChoice}.`;
+        result.style.color = 'var(--lose-red-color)';
         computerScore++;
     } else {
-        console.log(`You won! ${humanChoice} beats ${computerChoice}.`);
+        result.textContent = `You won! ${humanChoice} beats ${computerChoice}.`;
+        result.style.color = 'var(--win-green-color)';
         humanScore++;
     }
 }
 
-function playGame() {
-    for (let i = 0; i < 5; i++) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
-    }
-
-    if (humanScore > computerScore) {
-        console.log("Congrats! You won!");
-    } 
-    else if (computerScore > humanScore) {
-        console.log("Uh oh! You lost!");
-    } 
-    else {
-        console.log("It's a tie! No one won.");
-    }
+function driver(choice) {
+    playRound(choice,getComputerChoice());
 }
 
-let humanScore = 0, computerScore = 0;
-playGame();
+let humanScore = document.querySelector(".human-score");
+let computerScore = document.querySelector(".computer-score");
+
+let result = document.querySelector(".result");
+
+let btnContainer = document.querySelector(".choices");
+let rockBtn = document.querySelector("#rock");
+let paperBtn = document.querySelector("#paper");
+let scissorsBtn = document.querySelector("#scissors");
+
+btnContainer.addEventListener("click", (e) => {
+    let btnClicked = e.target;
+    driver(btnClicked.id);
+});

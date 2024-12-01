@@ -1,5 +1,6 @@
 :root {
-    --win-green-color : ;
+    --win-green-color : rgb(20, 147, 20);
+    --lose-red-color : rgb(170, 15, 15);
 }
 
 * {
@@ -52,4 +53,8 @@ body {
 
 .choice-button {
     height: 50px;
+}
+
+.hidden {
+    visibility: hidden;
 }
